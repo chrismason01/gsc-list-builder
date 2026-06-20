@@ -97,14 +97,17 @@
     background:#2a1d12;color:var(--warn);border:1px solid #5a4119;white-space:nowrap}
   .det-reason{font-size:10.5px;color:var(--bad);font-style:italic;margin-left:4px}
   .detach-card{margin-bottom:14px}
-  /* enhancement / upgrade availability tracker */
-  .trk{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
-  .trk:last-child{border-bottom:0}
-  .trk-nm{color:var(--ink);font-weight:600;min-width:0}
-  .trk-pts{color:var(--acid);font-weight:700;font-size:12px;margin-left:4px}
-  .trk-free{color:var(--good);font-size:12.5px;font-weight:700;white-space:nowrap}
-  .trk-used{color:var(--purple);font-size:12.5px;font-weight:600;text-align:right}
-  .trk-full{color:var(--warn)}
+  /* inline enhancement / upgrade chips (per character / unit) */
+  .epick{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+  .echip{font-size:12.5px;padding:6px 10px;border-radius:8px;border:1px solid var(--line2);background:var(--panel);color:var(--ink);cursor:pointer;user-select:none;transition:.12s}
+  .echip:hover{border-color:var(--purple)}
+  .echip.sel{background:var(--purple-d);border-color:var(--purple);color:#fff;font-weight:700}
+  .echip.off{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+  .echip.off:hover{border-color:var(--line2)}
+  .echip .ep{color:var(--acid);font-weight:700}
+  .echip.sel .ep{color:#fff}
+  .echip .ec{color:var(--faint);font-weight:600;font-size:11px}
+  .echip.sel .ec{color:#e9d9ff}
   .detach-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;border-bottom:1px solid var(--line);
     background:linear-gradient(180deg,var(--panel2),var(--panel))}
   .detach-head h3{font-size:16px;color:var(--bone)}
@@ -283,9 +286,8 @@
     .stepper button{width:34px;height:34px;font-size:20px}
 
     .sec-label{font-size:15px}
-    .trk{font-size:16px;padding:10px 0}
-    .trk-pts{font-size:13px}
-    .trk-free,.trk-used{font-size:14px}
+    .echip{font-size:15px;padding:9px 13px}
+    .echip .ec{font-size:13px}
     .rule-text{font-size:17px;line-height:1.55}
     .enh{padding:13px}
     .enh .e-name{font-size:18px}
@@ -380,7 +382,6 @@
 
       <div id="detachPicker"></div>
       <div id="detachCard"></div>
-      <div id="enhTracker"></div>
 
       <div id="armyList"></div>
 
@@ -1249,34 +1250,6 @@ window.GSC_DATA = {
   function enhUsedBy(key, exceptUid){
     return army.entries.filter(e=>e.uid!==exceptUid && e.enh && (e.enh.detId+"|"+e.enh.name)===key).length;
   }
-  function entriesWith(key){ return army.entries.filter(e=>e.enh && (e.enh.detId+"|"+e.enh.name)===key); }
-
-  // at-a-glance availability of every enhancement & upgrade from the chosen detachment(s)
-  function renderTracker(){
-    const host=$("#enhTracker"); host.innerHTML="";
-    const dets=selDets(); if(!dets.length) return;
-    const enh=[], upg=[];
-    dets.forEach(d=>(d.enhancements||[]).forEach(en=>{ (en.upgrade?upg:enh).push({en:en,key:d.id+"|"+en.name}); }));
-    if(!enh.length && !upg.length) return;
-    let body='<div class="detach-head"><h3>Enhancements &amp; Upgrades</h3></div><div class="pad">';
-    if(enh.length){
-      body+='<div class="sec-label">Enhancements · one use each</div>';
-      enh.forEach(o=>{ const users=entriesWith(o.key);
-        body+='<div class="trk"><span class="trk-nm">'+esc(o.en.name)+'<span class="trk-pts">+'+o.en.pts+'</span></span>'+
-          (users.length?'<span class="trk-used">✓ '+esc(users.map(u=>unitById[u.unitId].name).join(', '))+'</span>'
-                       :'<span class="trk-free">Available</span>')+'</div>';
-      });
-    }
-    if(upg.length){
-      body+='<div class="sec-label">Upgrades · up to 3 units each</div>';
-      upg.forEach(o=>{ const n=entriesWith(o.key).length, full=n>=3;
-        body+='<div class="trk"><span class="trk-nm">'+esc(o.en.name)+'<span class="trk-pts">+'+o.en.pts+'</span></span>'+
-          '<span class="trk-free'+(full?' trk-full':'')+'">'+n+'/3'+(full?' · full':'')+'</span></div>';
-      });
-    }
-    body+='</div>';
-    const card=ce("div","card detach-card"); card.innerHTML=body; host.appendChild(card);
-  }
 
   // ---------- Render: army list ----------
   function renderArmy(){
@@ -1311,35 +1284,28 @@ window.GSC_DATA = {
     r1+='<button class="btn icon sm danger" data-del="'+e.uid+'" title="Remove">✕</button>';
     r1+='</div>';
 
-    // row 2: enhancement (eligible) + warlord toggle (characters)
+    // row 2: enhancement/upgrade chips (eligible, greyed when unavailable) + warlord toggle
     let r2='';
     const isChar=u.category==="character";
     const elig=eligibleEnh(e);
     if(elig.length || isChar){
       r2+='<div class="e-row2">';
-      if(elig.length){
-        r2+='<span class="mini">'+(isChar?'Enhance':'Upgrade')+'</span>';
-        const cur=e.enh?(e.enh.detId+"|"+e.enh.name):"";
-        const byDet={};
-        elig.forEach(x=>{ (byDet[x.det.id]=byDet[x.det.id]||{name:x.det.name,items:[]}).items.push(x.en); });
-        let opts='<option value="">— none —</option>';
-        Object.keys(byDet).forEach(did=>{ const g=byDet[did];
-          opts+='<optgroup label="'+esc(g.name)+'">'+g.items.map(en=>{
-            const v=did+"|"+en.name, here=cur===v;
-            const limit=en.upgrade?3:1, other=enhUsedBy(v,e.uid), atMax=other>=limit;
-            let label=en.name+' (+'+en.pts+')';
-            if(en.upgrade) label+=' · '+(other+(here?1:0))+'/3';
-            else if(atMax && !here) label+=' — taken';
-            const dis=atMax && !here;
-            return '<option value="'+esc(v)+'"'+(here?' selected':'')+(dis?' disabled':'')+'>'+esc(label)+'</option>';
-          }).join('')+'</optgroup>';
-        });
-        r2+='<select data-enh="'+e.uid+'">'+opts+'</select>';
-      } else if(isChar){
-        r2+='<span class="mini" style="color:var(--faint)">'+(army.detachments.length?'no enhancement for this model':'pick a detachment')+'</span>';
-      }
+      if(elig.length) r2+='<span class="mini">'+(isChar?'Enhancement':'Upgrade')+'</span>';
+      else if(isChar) r2+='<span class="mini" style="color:var(--faint)">'+(army.detachments.length?'No enhancement for this model':'Pick a detachment first')+'</span>';
       if(isChar) r2+='<button class="btn ghost sm" data-wl="'+e.uid+'">'+(e.warlord?'★ Warlord':'☆ Warlord')+'</button>';
       r2+='</div>';
+      if(elig.length){
+        const cur=e.enh?(e.enh.detId+"|"+e.enh.name):"";
+        r2+='<div class="epick">';
+        r2+='<span class="echip'+(cur?'':' sel')+'" data-enhpick="'+e.uid+'" data-enhval="">None</span>';
+        elig.forEach(x=>{ const en=x.en, v=x.det.id+"|"+en.name, here=cur===v;
+          const limit=en.upgrade?3:1, other=enhUsedBy(v,e.uid), off=(other>=limit)&&!here;
+          const extra = en.upgrade ? ' <span class="ec">'+(other+(here?1:0))+'/3</span>' : (off?' <span class="ec">taken</span>':'');
+          r2+='<span class="echip'+(here?' sel':'')+(off?' off':'')+'" data-enhpick="'+e.uid+'" data-enhval="'+esc(v)+'">'+
+            esc(en.name)+' <span class="ep">+'+en.pts+'</span>'+extra+'</span>';
+        });
+        r2+='</div>';
+      }
     }
 
     // wargear stepper
@@ -1514,12 +1480,18 @@ window.GSC_DATA = {
   }
 
   // ---------- Wiring ----------
-  function refresh(){ save(); renderMeter(); renderArmy(); renderCatalogue(); renderTracker(); }
+  function refresh(){ save(); renderMeter(); renderArmy(); renderCatalogue(); }
 
   document.addEventListener("click",ev=>{
-    const t=ev.target.closest("[data-add],[data-info],[data-del],[data-wl],[data-wg],[data-close],[data-det]");
+    const t=ev.target.closest("[data-add],[data-info],[data-del],[data-wl],[data-wg],[data-close],[data-det],[data-enhpick]");
     if(!t) return;
-    if(t.dataset.det!=null) toggleDetach(t.dataset.det);
+    if(t.dataset.enhpick!=null){
+      if(t.classList.contains("off")) return;            // greyed-out: unavailable
+      const e=army.entries.find(x=>x.uid===t.dataset.enhpick), v=t.dataset.enhval;
+      const here = e && e.enh && (e.enh.detId+"|"+e.enh.name)===v;
+      setEnh(t.dataset.enhpick, here ? "" : v);           // tap selected chip again to clear
+    }
+    else if(t.dataset.det!=null) toggleDetach(t.dataset.det);
     else if(t.dataset.add!=null) addUnit(t.dataset.add);
     else if(t.dataset.info!=null) openDatasheet(t.dataset.info);
     else if(t.dataset.del!=null) removeEntry(t.dataset.del);
