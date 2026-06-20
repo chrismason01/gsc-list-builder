@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GSC Builder">
+<meta name="theme-color" content="#0d0a14">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAASyklEQVR4nO3dMZIb1xWG0RGLkaqUKXak1JlXwcRV1ha8AWyAwWwAG/AW5ConXIUzp4q8EblQNE1anOEMgO5+997/nFjiNNCNvt97DQ6/++H7H397AACivFl9AADA8QQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEOjt6gPgdu//8u/VhwDw8Pj3P6w+BG7w3Q/f//jbLf8jxzDkgc7EQV0CoBDDHkggCmoQAAsZ+ACCYBUBcCADH+BlguAYAmBnhj7A7cTAfgTATgx+gO0Ige0JgA0Z+gD7EwPbEAAbMPgBjicE7iMA7mDwA6wnBG4jABoP/vOHP60+BICH07t/PlQgBK4jAIoPfkMe6GxFHAiB1xEAxQa/gQ9MdmQQCIFvEwCLB7+BDyQ7IgiEwNMEwILhb+gDHBsDIuBrAuCgwW/oA6yPASHwmQDYefgb/AC1QkAEfCQAdhj8hj5A/Rh4DA+B+ADYcvgb/AC9QuAxOAKiA2Cr4W/wA/QNgcfQCIgMAIMfYA4hcJu4ANhi+Bv8ADND4DEoAt48BDH8Aeba4v78vsi/9XKEmB2Ae0+qwQ/Qx727AY8BOwHjA8DgB8glBEIfARj+ANnuvY+/H/xIYGwAGP4AXIiAoEcA95wsgx9grnseCTwOexwwbgfA8Adgj/v8+2E7AaMCwPAH4CUiYNgjgFtPisEPkOt04yOBCY8DRuwAGP4AHDkH3g/YCWgfAIY/APc4h0ZA+wC4heEPQPpcaB0At9RX4kkGYJ/58L7xLkDbADD8AdjaOSgCWgaA4Q/AXs4hEdAuAAx/APZ2DoiAdgFwLcMfgFuch8+PVgFwbV1NP3kA7Ot85RzptAvQJgAMfwBWOA+NgBYB0OXNBIAuc6tFAFzL6h+ALZ0HzpXyAWDrH4AKzsMeBZQOAMMfgErOgyKgdAAAAGEBYPUPQEXnIbsAJQPA8AegsvOACCgZANcw/AFY4dx8/pQLgIqVBADT5lu5AEiqLwB6OzeeQ6UCoFodAcDUOVcqAFKqC4A5zk3n0ZuOVdT1zQZgpvMVc6nKLkCZAAAAwgLA6h+A7rrtApQIAAAgLACs/gGY4txoF2B5AAAAYQFg9Q/ANOcmuwB2AAAgUIsAsPoHoJNzg7m1LABWf/kBACpYNQ9b7AAAAAMCwJf/AJjuXPzLgHYAACBQ6QCw+gegs3PhOXZ4APjyHwCsn4+ldwAAgLAAqLxtAgDd51nZAAAAhgSA5/8AUGNOltwBqLpdAgBT5lrJAAAA9iUAACDQYQHg+T8A1JmX5XYAKj4nAYBp861cAAAA+xMAABBIAABAoDeVvtBQ7fkIAGzptXPuiC8C2gEAgEACAAACCQAACCQAACCQAACAQAIAAALtHgD+CiAA1PurgHYAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAj0dvUBAPv4+acPm/1Zv/z6brM/C6hBAEBjWw75W3+OOICeBAA0cdSw3+K4RAHUJwCgqKoD/5ZjFwRQjwCAQjoP/de+LjEANQgAWGzq0H+OGIAaBAAskDb0nyMGYB0BAAcy+F9+b4QAHEMAwM4M/evYFYBjCADYicF/P7sCsB8BABsz+LcnBGB7AgA2YvDvTwjAdgQA3MngP54QgPv51wDhDob/Wt5/uJ0dALiBwVOH3QC4jQCAKxj8dQkBuI5HAPBKhn8PzhO8jh0AeIGB0o/dAHiZHQD4BsO/N+cPnicA4BmGxwzOIzzNIwD4HQNjHo8E4Gt2AOALhv9szi98JgDgvwyHDM4zfOQRAPEMhDweCYAdAMIZ/tmcf5IJAGK5+XPhOiCVACCSmz5fcj2QSAAQx82ep7guSCMAiOImz7e4PkgiAIjh5s5ruE5IIQCI4KbONVwvJBAAjOdmzi1cN0wnABjNTZx7uH6YTAAwlps3W3AdMZUAYCQ3bbbkemIiAcA4btbswXXFNAKAUdyk2ZPri0kEAGO4OXME1xlTCAAACCQAGMGqjCO53phAANCemzEruO7oTgDQmpswK7n+6EwA0JabLxW4DulKAABAIAFAS1ZdVOJ6pCMBQDtutlTkuqQbAQAAgQQArVhlUZnrk04EAG24udKB65QuBAAABBIAtGBVRSeuVzoQAJTnZkpHrluqEwAAEEgAUJpVFJ25fqlMAFCWmycTuI6pSgAAQCABQElWTUzieqYiAQAAgQQA5VgtMZHrmmoEAAAEEgCUYpXEZK5vKhEAABBIAFCG1REJXOdUIQAAIJAAoASrIpK43qlAAABAIAHAclZDJHLds5oAAIBAAoClrIJI5vpnJQEAAIEEAAAEEgAsY/sTfA5YRwAAQCABwBJWPfCZzwMrCAAACCQAACCQAOBwtjvhaz4XHE0AAEAgAQAAgQQAh7LNCc/z+eBIAgAAAgkAAAgkADiM7U14mc8JRxEAABBIAABAIAEAAIEEAIfwXBNez+eFIwgAAAgkAAAgkAAAgEACgN15ngnX87lhbwIAAAIJAAAIJAAAIJAAAIBAAoBd+SIT3M7nhz0JAAAIJAAAIJAAAIBAAgAAAgkAduMLTHA/nyP2IgAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgEACAAACvV19AJDsj3/784v/zb/++o+Hrqa/PuhMALALv7zkvqH43H/fYVhOf32rPk+//Ppu9WEwjACAgkOx27Cc/vpgIt8BgCbD8ag/91rTXx9MZQcAdnLEAPv0M1aslqe/PpjODgAMWL36ecC1BAAMGVZH/dzprw9SCAAYNKT2/vnTXx8kEQAwbDhN/1JeleOA7gQADBxKWx/P9NcHiQQAAAQSADB0NbrHL+eppOpxQRcCAAYPoXuPb/rrg2QCAAACCQAACCQAYPj2863HOf31QToBAACBBAAABBIAELDtfO3xTn99gAAAgEgCAAACCQAACCQAACCQAACAQAKAXfzy67vVhwBj+DyxBwEAAIEEAAAEEgBwg3/99R8Pk493+usDBAAARBIAABBIAMDwbedbj3P664N0AgAAAgkAAAgkANhNwi8vqb79fO/xTX99HSR8jlhDAMDQIbTVcU1/fZBKAABAIAEAA1ejWx/P9NcHiQQADBtKex3H9NcHaQQAu0r7AtPq4bT3z5/++qpJ+/xwLAEAQ4bUUT93+uuDFAIABgwrPw+41tur/w/gqqH1x7/9efefscL01wfT2QGAnflSXq0/F/jIDgCHfJHp558+PCT7cpjds2KuOhSnv74VfAGQvQkAKD4suw3F6a8PphAAsND04Tf99UFnvgMAAIEEAIfwPBNez+eFIwgAAAgkAAAgkAAAgEACgMN4rgkv8znhKAIAAAIJAAAIJAA4lO1NeJ7PB0cSAAAQSAAAQCABwOFsc8LXfC44mgAAgEACAAACCQCWsN0Jn/k8sIIAAIBAAoBlrHrA54B1BAAABBIAABBIALCU7U+Suf5ZSQAAQCABwHJWQSRy3bOaAACAQAKAEqyGSOJ6pwIBAACBBABlWBWRwHVOFQIAAAIJAEqxOmIy1zeVCAAACCQAKMcqiYlc11QjAAAgkACgJKslJnE9U5EAAIBAAoCyrJqYwHVMVQKA0tw86cz1S2UCAAACCQDKs4qiI9ct1QkAWnAzpRPXKx0IAAAIJABow6qKDlyndCEAaMXNlcpcn3QiAAAgkACgHassKnJd0o0AoCU3WypxPdKRAACAQAKAtqy6qMB1SFcCgNbcfFnJ9UdnAoD23IRZwXVHdwKAEdyMOZLrjQkEAAAEEgCMYVXGEVxnTCEAGMXNmT25vphEADCOmzR7cF0xjQBgJDdrtuR6YiIBwFhu2mzBdcRUAoDR3Ly5h+uHyQQA47mJcwvXDdMJACK4mXMN1wsJBAAx3NR5DdcJKQQAUdzc+RbXB0kEAHHc5HmK64I0AoBIbvZ8yfVAIgFALDd9LlwHpBIARHPzz+b8k+zt6gOAKkPg558+rD4UDmLwgx0A+B9DIYPzDB8JAPiC4TCb8wufeQQAv+ORwDwGP3zNDgA8w9CYwXmEpwkA+AbDozfnD57nEQC8wCOBfgx+eJkdAHglQ6UH5wlexw4AXMFuQF0GP1xHAMANhEAdBj/cxiMAuIPhs5b3H25nBwDuZDfgeAY/3E8AwEaEwP4MftiOAICNCYHtGfywPQEAOxEC9zP4YT8CAA4cYmLgZYY+HEMAwIHsCjzP4IdjCQBYwK7AR4Y+rCMAYLG0GDD0oQYBAIVMjQFDH+oRANBkaHYKAgMf6hMA0HioVogCwx56EgDQ2KpHBoY+9OcfAwKAQAIABjj6UUCFRw/AfQQAAAQSANDcqtW4XQDoTQAAQCABAACBBAA0tnobfvXPB24nAAAgkACApqqsvqscB3AdAQAAgQQANFRt1V3teICXCQAACCQAACCQAIBmqm63Vz0u4GkCAAACCQBopPoqu/rxAZ8JAAAIJACgiS6r6y7HCekEAAAEEgAAEEgAQAPdttW7HS8kEgAAEEgAQHFdV9NdjxtSCAAACCQAoLDuq+juxw+TCQAACCQAACCQAICipmyfT3kdMI0AAIBAAgAKmrZqnvZ6YAIBAACBBAAUM3W1PPV1QVcCAAACCQAACCQAoJDp2+TTXx90IgAAIJAAgCJSVscprxOqEwAAEEgAQAFpq+K01wsVCQAACCQAACDQ7gHw+Pc/vOq/O737596HAiWlboenvm44vXLevXZ+3soOAAAEEgCwUPoqOP31w0oCAAACCQBYxOr3I+8DrCEAACCQAACAQIcEgL8KCP/Ptvf/836Q4lTkrwBe2AEAgEACAA5mtfs07wscSwAAQKByAeB7AExmlftt3h8mOxWbb4cFwBFfaACA7h4PmpfldgAAgP0JADiI7e3X8T5BcABUe04CANPm2qEB4HsApLKqvY73i1SPB87JkjsAAEBoAFTcLoFbWM3exvvGFKei86xsAAAAgwLA9wAAYP18LL0DUHXbBF7LNvZ9vH90dyo8x0oHAAAwKACu2eaoXE/wLVav2/A+0tXpivm14vG4HQAACLQsAHwZkMmsWrfl/WSyx0XzsMUOgMcAAHRyajC3WgQAADAoAHwZkIlsV+/D+0oXp+Jf/vvEDgAABFoeAHYBmMQqdV/eX6o7NVn9lwgAACA0AOwCMIHV6TG8z1R1arT6LxMAAEBoANgFAKCrU7PVf6kAuJYIoBLb0sfyflPJqek8KhUAVaoIAKbPuVIBkFJdzGI1uob3nQpOjedQuQCoVEcAMHW+lQuApPqiP6vQtbz/rHRqPn/eTKik7icBgF5OV86daqv/sgFwIQIAqOg0YPiXDgCozvZzDc4DDAwAuwAAVHIasvovHwAXIoCKrDprcT44wmnQ8G8RALcQAQBs6TRwrrQIgOoVRRarzZqcFyp5bDC3WgTAhUcBAKxwGrb13y4ALkQAAEc6DR3+7QLgFiKALdlmrs35YUun4fOjXQDcUlfTTyIA2zrdMDc6rf5bBsCFCGAFq8senCfudQoY/m0D4EIEALC1U8jwbx0AFyKAo1hV9uJ8cYtT0PBvHwC3EgEApM+F9gFwa30lnmwAtpsHj41X/yMC4EIEsCfbyT05b7zGKXT4X3z3w/c//vYwxPu//Pvm//f84U+bHgtzGCR9/fLru9WHQFGnOxaAE4b/mB2ALU6K3QCeYvj35vzxFMN/YABciAAAnmP4D30EsNXjgAuPBLB6nMOjAO5d4D0OG/4jdwC2Oll2AwBmMPzDAuBCBABkM/wDHwH8nkcCXMP2/zweA2Qx+F8WEwBbRMCFEMggAOYRABm22Ll9DBj+4x8B7HFSPRaYz/CfyXmdz/C/TtQOwJY7ARd2A2YyKOayCzDTVguzx6DhHxsAnwgBfs/wn08EzGHw3yc6ALaMgAsh0J8AmE8A9Lflo9jH0OF/ER8AW0fAhRAA2N7W38F6DB7+FwJgxxC4EAMAtb54nT74PxEAB0TAhRAAWP83rgz/zwTAwSFwIQYAjv1r1gb/1wTAogj4RAwAyY743SqG/9MEQJEQ+EQQAJMd+cvUDP5vEwBFQ+ATQQB0tuK3pxr8ryMAmoTAU8QBUEGVX5Fu8F9HAAwIAYBkBv9tBMAGhADA8Qz++wiADQkBgP0Z/NsQADsRAwDbMfS3JwB2JgQAbmfw70cAHEgMALzM0D+GAFhIEAAY+KsIgEIEAZDAwK9BABQnCoDODPu6BEBj4gCowJDvSQAAQKA3qw8AADieAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgEACAAACCQAACCQAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgIc8/wFQbbxA7RlOvQAAAABJRU5ErkJggg==">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAASyklEQVR4nO3dMZIb1xWG0RGLkaqUKXak1JlXwcRV1ha8AWyAwWwAG/AW5ConXIUzp4q8EblQNE1anOEMgO5+997/nFjiNNCNvt97DQ6/++H7H397AACivFl9AADA8QQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEEgAAEAgAQAAgQQAAAQSAAAQSAAAQCABAACBBAAABBIAABBIAABAIAEAAIEEAAAEEgAAEOjt6gPgdu//8u/VhwDw8Pj3P6w+BG7w3Q/f//jbLf8jxzDkgc7EQV0CoBDDHkggCmoQAAsZ+ACCYBUBcCADH+BlguAYAmBnhj7A7cTAfgTATgx+gO0Ige0JgA0Z+gD7EwPbEAAbMPgBjicE7iMA7mDwA6wnBG4jABoP/vOHP60+BICH07t/PlQgBK4jAIoPfkMe6GxFHAiB1xEAxQa/gQ9MdmQQCIFvEwCLB7+BDyQ7IgiEwNMEwILhb+gDHBsDIuBrAuCgwW/oA6yPASHwmQDYefgb/AC1QkAEfCQAdhj8hj5A/Rh4DA+B+ADYcvgb/AC9QuAxOAKiA2Cr4W/wA/QNgcfQCIgMAIMfYA4hcJu4ANhi+Bv8ADND4DEoAt48BDH8Aeba4v78vsi/9XKEmB2Ae0+qwQ/Qx727AY8BOwHjA8DgB8glBEIfARj+ANnuvY+/H/xIYGwAGP4AXIiAoEcA95wsgx9grnseCTwOexwwbgfA8Adgj/v8+2E7AaMCwPAH4CUiYNgjgFtPisEPkOt04yOBCY8DRuwAGP4AHDkH3g/YCWgfAIY/APc4h0ZA+wC4heEPQPpcaB0At9RX4kkGYJ/58L7xLkDbADD8AdjaOSgCWgaA4Q/AXs4hEdAuAAx/APZ2DoiAdgFwLcMfgFuch8+PVgFwbV1NP3kA7Ot85RzptAvQJgAMfwBWOA+NgBYB0OXNBIAuc6tFAFzL6h+ALZ0HzpXyAWDrH4AKzsMeBZQOAMMfgErOgyKgdAAAAGEBYPUPQEXnIbsAJQPA8AegsvOACCgZANcw/AFY4dx8/pQLgIqVBADT5lu5AEiqLwB6OzeeQ6UCoFodAcDUOVcqAFKqC4A5zk3n0ZuOVdT1zQZgpvMVc6nKLkCZAAAAwgLA6h+A7rrtApQIAAAgLACs/gGY4txoF2B5AAAAYQFg9Q/ANOcmuwB2AAAgUIsAsPoHoJNzg7m1LABWf/kBACpYNQ9b7AAAAAMCwJf/AJjuXPzLgHYAACBQ6QCw+gegs3PhOXZ4APjyHwCsn4+ldwAAgLAAqLxtAgDd51nZAAAAhgSA5/8AUGNOltwBqLpdAgBT5lrJAAAA9iUAACDQYQHg+T8A1JmX5XYAKj4nAYBp861cAAAA+xMAABBIAABAoDeVvtBQ7fkIAGzptXPuiC8C2gEAgEACAAACCQAACCQAACCQAACAQAIAAALtHgD+CiAA1PurgHYAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAj0dvUBAPv4+acPm/1Zv/z6brM/C6hBAEBjWw75W3+OOICeBAA0cdSw3+K4RAHUJwCgqKoD/5ZjFwRQjwCAQjoP/de+LjEANQgAWGzq0H+OGIAaBAAskDb0nyMGYB0BAAcy+F9+b4QAHEMAwM4M/evYFYBjCADYicF/P7sCsB8BABsz+LcnBGB7AgA2YvDvTwjAdgQA3MngP54QgPv51wDhDob/Wt5/uJ0dALiBwVOH3QC4jQCAKxj8dQkBuI5HAPBKhn8PzhO8jh0AeIGB0o/dAHiZHQD4BsO/N+cPnicA4BmGxwzOIzzNIwD4HQNjHo8E4Gt2AOALhv9szi98JgDgvwyHDM4zfOQRAPEMhDweCYAdAMIZ/tmcf5IJAGK5+XPhOiCVACCSmz5fcj2QSAAQx82ep7guSCMAiOImz7e4PkgiAIjh5s5ruE5IIQCI4KbONVwvJBAAjOdmzi1cN0wnABjNTZx7uH6YTAAwlps3W3AdMZUAYCQ3bbbkemIiAcA4btbswXXFNAKAUdyk2ZPri0kEAGO4OXME1xlTCAAACCQAGMGqjCO53phAANCemzEruO7oTgDQmpswK7n+6EwA0JabLxW4DulKAABAIAFAS1ZdVOJ6pCMBQDtutlTkuqQbAQAAgQQArVhlUZnrk04EAG24udKB65QuBAAABBIAtGBVRSeuVzoQAJTnZkpHrluqEwAAEEgAUJpVFJ25fqlMAFCWmycTuI6pSgAAQCABQElWTUzieqYiAQAAgQQA5VgtMZHrmmoEAAAEEgCUYpXEZK5vKhEAABBIAFCG1REJXOdUIQAAIJAAoASrIpK43qlAAABAIAHAclZDJHLds5oAAIBAAoClrIJI5vpnJQEAAIEEAAAEEgAsY/sTfA5YRwAAQCABwBJWPfCZzwMrCAAACCQAACCQAOBwtjvhaz4XHE0AAEAgAQAAgQQAh7LNCc/z+eBIAgAAAgkAAAgkADiM7U14mc8JRxEAABBIAABAIAEAAIEEAIfwXBNez+eFIwgAAAgkAAAgkAAAgEACgN15ngnX87lhbwIAAAIJAAAIJAAAIJAAAIBAAoBd+SIT3M7nhz0JAAAIJAAAIJAAAIBAAgAAAgkAduMLTHA/nyP2IgAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgEACAAACvV19AJDsj3/784v/zb/++o+Hrqa/PuhMALALv7zkvqH43H/fYVhOf32rPk+//Ppu9WEwjACAgkOx27Cc/vpgIt8BgCbD8ag/91rTXx9MZQcAdnLEAPv0M1aslqe/PpjODgAMWL36ecC1BAAMGVZH/dzprw9SCAAYNKT2/vnTXx8kEQAwbDhN/1JeleOA7gQADBxKWx/P9NcHiQQAAAQSADB0NbrHL+eppOpxQRcCAAYPoXuPb/rrg2QCAAACCQAACCQAYPj2863HOf31QToBAACBBAAABBIAELDtfO3xTn99gAAAgEgCAAACCQAACCQAACCQAACAQAKAXfzy67vVhwBj+DyxBwEAAIEEAAAEEgBwg3/99R8Pk493+usDBAAARBIAABBIAMDwbedbj3P664N0AgAAAgkAAAgkANhNwi8vqb79fO/xTX99HSR8jlhDAMDQIbTVcU1/fZBKAABAIAEAA1ejWx/P9NcHiQQADBtKex3H9NcHaQQAu0r7AtPq4bT3z5/++qpJ+/xwLAEAQ4bUUT93+uuDFAIABgwrPw+41tur/w/gqqH1x7/9efefscL01wfT2QGAnflSXq0/F/jIDgCHfJHp558+PCT7cpjds2KuOhSnv74VfAGQvQkAKD4suw3F6a8PphAAsND04Tf99UFnvgMAAIEEAIfwPBNez+eFIwgAAAgkAAAgkAAAgEACgMN4rgkv8znhKAIAAAIJAAAIJAA4lO1NeJ7PB0cSAAAQSAAAQCABwOFsc8LXfC44mgAAgEACAAACCQCWsN0Jn/k8sIIAAIBAAoBlrHrA54B1BAAABBIAABBIALCU7U+Suf5ZSQAAQCABwHJWQSRy3bOaAACAQAKAEqyGSOJ6pwIBAACBBABlWBWRwHVOFQIAAAIJAEqxOmIy1zeVCAAACCQAKMcqiYlc11QjAAAgkACgJKslJnE9U5EAAIBAAoCyrJqYwHVMVQKA0tw86cz1S2UCAAACCQDKs4qiI9ct1QkAWnAzpRPXKx0IAAAIJABow6qKDlyndCEAaMXNlcpcn3QiAAAgkACgHassKnJd0o0AoCU3WypxPdKRAACAQAKAtqy6qMB1SFcCgNbcfFnJ9UdnAoD23IRZwXVHdwKAEdyMOZLrjQkEAAAEEgCMYVXGEVxnTCEAGMXNmT25vphEADCOmzR7cF0xjQBgJDdrtuR6YiIBwFhu2mzBdcRUAoDR3Ly5h+uHyQQA47mJcwvXDdMJACK4mXMN1wsJBAAx3NR5DdcJKQQAUdzc+RbXB0kEAHHc5HmK64I0AoBIbvZ8yfVAIgFALDd9LlwHpBIARHPzz+b8k+zt6gOAKkPg558+rD4UDmLwgx0A+B9DIYPzDB8JAPiC4TCb8wufeQQAv+ORwDwGP3zNDgA8w9CYwXmEpwkA+AbDozfnD57nEQC8wCOBfgx+eJkdAHglQ6UH5wlexw4AXMFuQF0GP1xHAMANhEAdBj/cxiMAuIPhs5b3H25nBwDuZDfgeAY/3E8AwEaEwP4MftiOAICNCYHtGfywPQEAOxEC9zP4YT8CAA4cYmLgZYY+HEMAwIHsCjzP4IdjCQBYwK7AR4Y+rCMAYLG0GDD0oQYBAIVMjQFDH+oRANBkaHYKAgMf6hMA0HioVogCwx56EgDQ2KpHBoY+9OcfAwKAQAIABjj6UUCFRw/AfQQAAAQSANDcqtW4XQDoTQAAQCABAACBBAA0tnobfvXPB24nAAAgkACApqqsvqscB3AdAQAAgQQANFRt1V3teICXCQAACCQAACCQAIBmqm63Vz0u4GkCAAACCQBopPoqu/rxAZ8JAAAIJACgiS6r6y7HCekEAAAEEgAAEEgAQAPdttW7HS8kEgAAEEgAQHFdV9NdjxtSCAAACCQAoLDuq+juxw+TCQAACCQAACCQAICipmyfT3kdMI0AAIBAAgAKmrZqnvZ6YAIBAACBBAAUM3W1PPV1QVcCAAACCQAACCQAoJDp2+TTXx90IgAAIJAAgCJSVscprxOqEwAAEEgAQAFpq+K01wsVCQAACCQAACDQ7gHw+Pc/vOq/O737596HAiWlboenvm44vXLevXZ+3soOAAAEEgCwUPoqOP31w0oCAAACCQBYxOr3I+8DrCEAACCQAACAQIcEgL8KCP/Ptvf/836Q4lTkrwBe2AEAgEACAA5mtfs07wscSwAAQKByAeB7AExmlftt3h8mOxWbb4cFwBFfaACA7h4PmpfldgAAgP0JADiI7e3X8T5BcABUe04CANPm2qEB4HsApLKqvY73i1SPB87JkjsAAEBoAFTcLoFbWM3exvvGFKei86xsAAAAgwLA9wAAYP18LL0DUHXbBF7LNvZ9vH90dyo8x0oHAAAwKACu2eaoXE/wLVav2/A+0tXpivm14vG4HQAACLQsAHwZkMmsWrfl/WSyx0XzsMUOgMcAAHRyajC3WgQAADAoAHwZkIlsV+/D+0oXp+Jf/vvEDgAABFoeAHYBmMQqdV/eX6o7NVn9lwgAACA0AOwCMIHV6TG8z1R1arT6LxMAAEBoANgFAKCrU7PVf6kAuJYIoBLb0sfyflPJqek8KhUAVaoIAKbPuVIBkFJdzGI1uob3nQpOjedQuQCoVEcAMHW+lQuApPqiP6vQtbz/rHRqPn/eTKik7icBgF5OV86daqv/sgFwIQIAqOg0YPiXDgCozvZzDc4DDAwAuwAAVHIasvovHwAXIoCKrDprcT44wmnQ8G8RALcQAQBs6TRwrrQIgOoVRRarzZqcFyp5bDC3WgTAhUcBAKxwGrb13y4ALkQAAEc6DR3+7QLgFiKALdlmrs35YUun4fOjXQDcUlfTTyIA2zrdMDc6rf5bBsCFCGAFq8senCfudQoY/m0D4EIEALC1U8jwbx0AFyKAo1hV9uJ8cYtT0PBvHwC3EgEApM+F9gFwa30lnmwAtpsHj41X/yMC4EIEsCfbyT05b7zGKXT4X3z3w/c//vYwxPu//Pvm//f84U+bHgtzGCR9/fLru9WHQFGnOxaAE4b/mB2ALU6K3QCeYvj35vzxFMN/YABciAAAnmP4D30EsNXjgAuPBLB6nMOjAO5d4D0OG/4jdwC2Oll2AwBmMPzDAuBCBABkM/wDHwH8nkcCXMP2/zweA2Qx+F8WEwBbRMCFEMggAOYRABm22Ll9DBj+4x8B7HFSPRaYz/CfyXmdz/C/TtQOwJY7ARd2A2YyKOayCzDTVguzx6DhHxsAnwgBfs/wn08EzGHw3yc6ALaMgAsh0J8AmE8A9Lflo9jH0OF/ER8AW0fAhRAA2N7W38F6DB7+FwJgxxC4EAMAtb54nT74PxEAB0TAhRAAWP83rgz/zwTAwSFwIQYAjv1r1gb/1wTAogj4RAwAyY743SqG/9MEQJEQ+EQQAJMd+cvUDP5vEwBFQ+ATQQB0tuK3pxr8ryMAmoTAU8QBUEGVX5Fu8F9HAAwIAYBkBv9tBMAGhADA8Qz++wiADQkBgP0Z/NsQADsRAwDbMfS3JwB2JgQAbmfw70cAHEgMALzM0D+GAFhIEAAY+KsIgEIEAZDAwK9BABQnCoDODPu6BEBj4gCowJDvSQAAQKA3qw8AADieAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgEACAAACCQAACCQAACCQAACAQAIAAAIJAAAIJAAAIJAAAIBAAgAAAgkAAAgkAAAgkAAAgIc8/wFQbbxA7RlOvQAAAABJRU5ErkJggg==">
+<title>Genestealer Cults — List Builder</title>
+<style>
+  :root{
+    --bg:#0d0a14; --bg2:#15101f; --panel:#191325; --panel2:#211934;
+    --line:#322747; --line2:#43345f;
+    --ink:#ece6f5; --muted:#9c8fb8; --faint:#6f6388;
+    --purple:#8b5cf6; --purple-d:#6d36e0; --acid:#9ad22f; --bone:#e9e1cf;
+    --good:#46c46b; --warn:#f0b429; --bad:#ef5a6f;
+    --radius:12px; --shadow:0 8px 28px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:radial-gradient(1200px 600px at 80% -10%,#241a3a 0%,var(--bg) 55%) fixed,var(--bg);
+    color:var(--ink); font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--purple)}
+  h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:.2px}
+  button{font-family:inherit;cursor:pointer}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 16px 60px}
+
+  /* ---- Top bar ---- */
+  header{position:sticky;top:0;z-index:30;background:linear-gradient(180deg,rgba(13,10,20,.97),rgba(13,10,20,.82));
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);box-shadow:0 6px 18px rgba(0,0,0,.35)}
+  .topbar{max-width:1240px;margin:0 auto;padding:10px 16px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:11px;min-width:0}
+  .glyph{width:38px;height:38px;flex:0 0 38px}
+  .brand h1{font-size:17px;line-height:1.05}
+  .brand .sub{font-size:11px;color:var(--faint);letter-spacing:1.5px;text-transform:uppercase}
+  .topctrl{display:flex;gap:10px;align-items:center;margin-left:auto;flex-wrap:wrap}
+  input,select{background:var(--panel2);color:var(--ink);border:1px solid var(--line2);border-radius:9px;
+    padding:8px 10px;font:inherit;outline:none}
+  input:focus,select:focus{border-color:var(--purple)}
+  .army-name{min-width:190px;font-weight:600}
+  .limitbox{display:flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:5px 9px}
+  .limitbox label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .limitbox input{width:78px;padding:5px 7px;text-align:right}
+
+  /* ---- Points meter ---- */
+  .meter{display:flex;flex-direction:column;gap:4px;min-width:200px}
+  .meter .nums{display:flex;justify-content:space-between;align-items:baseline;font-variant-numeric:tabular-nums}
+  .meter .total{font-size:20px;font-weight:800}
+  .meter .lim{font-size:12px;color:var(--muted)}
+  .bar{height:8px;background:#241b38;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--acid));
+    transition:width .25s ease, background .25s}
+  .bar.over > i{background:linear-gradient(90deg,#b3324a,var(--bad))}
+  .pillstat{font-size:11px;color:var(--muted)}
+  .pillstat b{color:var(--ink)}
+
+  /* ---- Layout ---- */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  @media(max-width:880px){.grid{grid-template-columns:1fr}}
+  .col h2{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);
+    margin:2px 0 10px;display:flex;align-items:center;gap:8px}
+  .col h2 .count{color:var(--faint);font-weight:600}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .pad{padding:14px}
+
+  /* ---- Detachment picker ---- */
+  .dp-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .dp-head .dp-title{font-size:13px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);font-weight:700}
+  .dp-meter{display:flex;align-items:center;gap:7px;margin-left:auto}
+  .dp-pips{display:flex;gap:4px}
+  .dp-pip{width:16px;height:16px;border-radius:5px;background:#241b38;border:1px solid var(--line2)}
+  .dp-pip.on{background:linear-gradient(180deg,var(--purple),var(--purple-d));border-color:var(--purple)}
+  .dp-pip.over{background:var(--bad);border-color:var(--bad)}
+  .dp-count{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .dp-count b{color:var(--ink)}
+  .det-row{display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;
+    margin-bottom:6px;background:var(--panel);cursor:pointer;transition:.15s}
+  .det-row:hover{border-color:var(--line2);background:var(--panel2)}
+  .det-row.sel{border-color:var(--purple);background:linear-gradient(180deg,var(--panel2),rgba(139,92,246,.07))}
+  .det-row.disabled{opacity:.45;cursor:not-allowed}
+  .det-row.disabled:hover{border-color:var(--line);background:var(--panel)}
+  .det-check{width:18px;height:18px;flex:0 0 18px;border-radius:5px;border:1.5px solid var(--line2);display:flex;
+    align-items:center;justify-content:center;font-size:12px;color:#fff}
+  .det-row.sel .det-check{background:var(--purple-d);border-color:var(--purple)}
+  .det-nm{flex:1;min-width:0;font-weight:600}
+  .det-nm small{display:block;font-weight:400;color:var(--faint);font-size:11px}
+  .det-dp{font-size:10.5px;font-weight:700;letter-spacing:.4px;padding:3px 7px;border-radius:6px;
+    background:#2a1d12;color:var(--warn);border:1px solid #5a4119;white-space:nowrap}
+  .det-reason{font-size:10.5px;color:var(--bad);font-style:italic;margin-left:4px}
+  .detach-card{margin-bottom:14px}
+  .detach-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,var(--panel2),var(--panel))}
+  .detach-head h3{font-size:16px;color:var(--bone)}
+  .tag{font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:3px 7px;border-radius:6px;
+    background:#2c2142;color:var(--purple);border:1px solid var(--line2)}
+  .tag.dp{background:#2a1d12;color:var(--warn);border-color:#5a4119}
+  .tag.uq{background:#241433;color:#c79bff;border-color:#4a2f6e}
+  .tag.pdf{background:#3a1620;color:#ff90a3;border-color:#5e2533}
+  .rule-text{font-size:13.5px;color:var(--ink);white-space:pre-wrap}
+  .sec-label{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--purple);margin:14px 0 7px;font-weight:700}
+  .enh{border:1px solid var(--line);border-radius:9px;padding:9px 11px;margin-bottom:7px;background:var(--panel2)}
+  .enh .e-top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+  .enh .e-name{font-weight:700;color:var(--bone)}
+  .enh .e-pts{color:var(--acid);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .enh .e-only{font-size:11px;color:var(--faint);font-style:italic}
+  .enh .e-text{font-size:12.5px;color:var(--muted);margin-top:3px}
+  details.strat{border:1px solid var(--line);border-radius:9px;margin-bottom:6px;background:var(--panel2);overflow:hidden}
+  details.strat>summary{list-style:none;cursor:pointer;padding:9px 11px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+  details.strat>summary::-webkit-details-marker{display:none}
+  .strat .s-name{font-weight:700;color:var(--ink)}
+  .strat .s-cp{color:var(--warn);font-weight:700;font-size:12.5px}
+  .strat .s-cat{font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.6px}
+  .strat .s-body{padding:0 11px 11px;font-size:12.5px;color:var(--muted)}
+  .strat .s-body b{color:var(--purple);font-weight:700}
+  .note{font-size:12px;color:var(--faint);font-style:italic;padding:10px 14px}
+
+  /* ---- Catalogue ---- */
+  .searchbox{position:relative;margin-bottom:12px}
+  .searchbox input{width:100%;padding-left:34px}
+  .searchbox svg{position:absolute;left:10px;top:9px;opacity:.5}
+  .catgroup{margin-bottom:14px}
+  .catgroup>h3{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--faint);margin:0 0 6px;
+    display:flex;align-items:center;gap:8px}
+  .catgroup>h3:before{content:"";height:1px;flex:0 0 14px;background:var(--line2)}
+  .catgroup>h3:after{content:"";height:1px;flex:1;background:var(--line)}
+  .urow{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;
+    margin-bottom:6px;background:var(--panel);transition:border-color .15s,background .15s}
+  .urow:hover{border-color:var(--line2);background:var(--panel2)}
+  .urow .uname{font-weight:600;flex:1;min-width:0}
+  .urow .uname small{display:block;font-weight:400;color:var(--faint);font-size:11px}
+  .role-chip{font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 6px;border-radius:5px;
+    background:#2c2142;color:var(--purple);border:1px solid var(--line2)}
+  .role-chip.sup{background:#13241f;color:#5fd6a3;border-color:#1f4a39}
+  .upts{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px;white-space:nowrap}
+  .upts b{color:var(--ink)}
+  .btn{border:1px solid var(--line2);background:var(--panel2);color:var(--ink);border-radius:8px;padding:7px 11px;font-size:13px;font-weight:600;transition:.15s}
+  .btn:hover{border-color:var(--purple);color:#fff}
+  .btn.primary{background:var(--purple-d);border-color:var(--purple);color:#fff}
+  .btn.primary:hover{background:var(--purple)}
+  .btn.ghost{background:transparent}
+  .btn.sm{padding:4px 8px;font-size:12px}
+  .btn.icon{padding:6px 8px;line-height:1}
+  .btn.danger:hover{border-color:var(--bad);color:var(--bad)}
+
+  /* ---- Army list ---- */
+  .empty{padding:34px 18px;text-align:center;color:var(--faint);border:1.5px dashed var(--line2);border-radius:12px}
+  .empty .big{font-size:15px;color:var(--muted);margin-bottom:4px}
+  .agroup{margin-bottom:14px}
+  .agroup>h3{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--purple);margin:0 0 7px}
+  .entry{border:1px solid var(--line);border-radius:11px;background:var(--panel2);padding:10px 11px;margin-bottom:8px}
+  .entry .e-row1{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .entry .e-nm{font-weight:700;flex:1;min-width:120px;color:var(--bone)}
+  .entry .e-nm .wl{font-size:9.5px;background:#3a2c11;color:var(--warn);border:1px solid #5a4119;border-radius:5px;
+    padding:1px 5px;margin-left:6px;letter-spacing:.5px;text-transform:uppercase;vertical-align:middle}
+  .entry .e-cost{font-variant-numeric:tabular-nums;font-weight:800;color:var(--ink)}
+  .entry .e-cost .tier{display:block;font-size:10px;font-weight:600;color:var(--warn);text-align:right}
+  .entry select.sz{padding:5px 7px;font-size:12.5px}
+  .entry .e-row2{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .entry .e-row2 select{padding:5px 7px;font-size:12px;max-width:100%}
+  .mini{font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px}
+  .attach-line{font-size:12px;color:var(--acid);margin-top:6px}
+  .attach-line.empty-lead{color:var(--faint)}
+  .ledchips{margin-top:6px;display:flex;gap:5px;flex-wrap:wrap}
+  .ledchip{font-size:11px;background:#241433;border:1px solid #4a2f6e;color:#c79bff;border-radius:6px;padding:2px 7px}
+  .stepper{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line2);border-radius:8px;padding:2px 4px}
+  .stepper button{width:22px;height:22px;border:none;background:transparent;color:var(--ink);font-size:15px;border-radius:5px}
+  .stepper button:hover{background:var(--panel2)}
+  .stepper .qn{min-width:16px;text-align:center;font-variant-numeric:tabular-nums}
+
+  .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+
+  /* ---- Modal ---- */
+  .modal-bg{position:fixed;inset:0;background:rgba(6,4,12,.72);backdrop-filter:blur(3px);z-index:60;display:none;
+    align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--panel);border:1px solid var(--line2);border-radius:14px;max-width:680px;width:100%;box-shadow:var(--shadow)}
+  .ds-head{display:flex;align-items:flex-start;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,var(--panel2),var(--panel));border-radius:14px 14px 0 0}
+  .ds-head h3{font-size:21px;color:var(--bone)}
+  .ds-head .ds-meta{font-size:12px;color:var(--muted);margin-top:2px}
+  .ds-close{margin-left:auto;background:transparent;border:1px solid var(--line2);color:var(--muted);border-radius:8px;
+    width:32px;height:32px;font-size:18px}
+  .ds-close:hover{color:#fff;border-color:var(--bad)}
+  .ds-body{padding:16px 18px}
+  .stat-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .stat-cell{flex:1;min-width:48px;text-align:center;background:var(--panel2);border:1px solid var(--line2);border-radius:8px;padding:6px 4px}
+  .stat-cell .k{font-size:10px;color:var(--faint);font-weight:700}
+  .stat-cell .v{font-size:17px;font-weight:800;color:var(--ink)}
+  .stat-prof{font-size:11px;color:var(--muted);margin:0 0 4px;font-style:italic}
+  table.w{width:100%;border-collapse:collapse;margin:4px 0 6px;font-size:12.5px}
+  table.w th{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
+  table.w td{padding:5px 6px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+  table.w td.wn{font-variant-numeric:normal;font-weight:600;color:var(--ink)}
+  table.w .kw{font-size:11px;color:var(--purple)}
+  .ds-sub{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--purple);margin:14px 0 6px;font-weight:700}
+  .ab{margin-bottom:8px;font-size:13px}
+  .ab b{color:var(--bone)}
+  .keyword-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+  .kwchip{font-size:11px;background:var(--panel2);border:1px solid var(--line2);color:var(--muted);border-radius:6px;padding:2px 7px}
+  .li{font-size:12.5px;color:var(--muted);margin:2px 0}
+  .li:before{content:"▪ ";color:var(--purple)}
+
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--purple-d);
+    color:#fff;padding:10px 18px;border-radius:10px;box-shadow:var(--shadow);opacity:0;pointer-events:none;
+    transition:.25s;z-index:80;font-weight:600}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .foot{margin-top:26px;text-align:center;color:var(--faint);font-size:11.5px;line-height:1.7}
+  .hidden{display:none!important}
+
+  /* ============ MOBILE — maximum legibility ============ */
+  @media (max-width:640px){
+    html,body{overflow-x:hidden;max-width:100%}
+    body{font-size:17px}
+    .wrap{padding:0 10px 70px}
+    .topbar{padding:10px 12px;gap:9px}
+    .brand .glyph{width:34px;height:34px;flex-basis:34px}
+    .brand h1{font-size:18px}
+    .topctrl{gap:8px;width:100%;margin-left:0}
+    .army-name{flex:1 1 100%;min-width:0;font-size:16px;padding:12px}
+    .limitbox{flex:0 0 auto}
+    .meter{flex:1 1 100%;min-width:0}
+    .meter .total{font-size:26px}
+    .meter .lim,.pillstat{font-size:13px}
+    .bar{height:10px}
+    .grid{grid-template-columns:1fr;gap:16px;margin-top:14px}
+    .col h2{font-size:14px}
+
+    /* 16px on inputs prevents iOS auto-zoom-on-focus */
+    input,select{font-size:16px;padding:12px}
+    .btn{padding:11px 15px;font-size:15px}
+    .btn.sm{padding:9px 12px;font-size:14px}
+    .btn.icon{padding:10px 12px;font-size:16px}
+
+    .searchbox input{font-size:16px;padding-left:38px}
+    .urow{padding:12px;gap:8px;flex-wrap:wrap}
+    .urow .uname{font-size:16px;flex:1 1 100%}
+    .urow .uname small{font-size:12px}
+    .urow .upts{font-size:14px}
+    .catgroup>h3,.agroup>h3{font-size:13px}
+
+    .dp-title{font-size:14px}
+    .dp-count{font-size:13px}
+    .dp-pip{width:18px;height:18px}
+    .det-row{padding:13px 12px}
+    .det-nm{font-size:16px}
+    .det-nm small{font-size:12px}
+    .det-dp{font-size:11.5px;padding:4px 8px}
+
+    .entry{padding:13px 12px}
+    .entry .e-nm{font-size:16px;flex:1 1 100%}
+    .entry .e-cost{font-size:19px}
+    .entry select.sz{font-size:15px;padding:10px}
+    .entry .e-row2{gap:9px}
+    .entry .e-row2 select{font-size:15px;padding:10px}
+    .mini{font-size:12px}
+    .attach-line{font-size:13px}
+    .ledchip{font-size:12px;padding:3px 8px}
+    .stepper button{width:30px;height:30px;font-size:18px}
+
+    .sec-label{font-size:12.5px}
+    .rule-text{font-size:15px}
+    .enh{padding:11px 12px}
+    .enh .e-name{font-size:15.5px}
+    .enh .e-pts{font-size:15px}
+    .enh .e-text{font-size:14px}
+    .enh .e-only{font-size:12.5px}
+    details.strat>summary{padding:12px}
+    .strat .s-name{font-size:15px}
+    .strat .s-body{font-size:14px;padding:0 12px 12px}
+    .note{font-size:13px}
+
+    /* datasheet modal → full-screen, large */
+    .modal-bg{padding:0;align-items:stretch}
+    .modal{max-width:100%;min-height:100%;border-radius:0;overflow-x:hidden}
+    .ds-head{padding:16px 14px;position:sticky;top:0;z-index:2;border-radius:0}
+    .ds-head h3{font-size:25px}
+    .ds-head .ds-meta{font-size:14px}
+    .ds-close{width:42px;height:42px;font-size:22px;flex:0 0 42px}
+    .ds-body{padding:16px 14px}
+    .stat-strip{gap:5px}
+    .stat-cell{min-width:0;padding:9px 2px}
+    .stat-cell .k{font-size:12px}
+    .stat-cell .v{font-size:22px}
+    table.w{font-size:15px;table-layout:fixed}
+    table.w th{font-size:12px;padding:6px 4px}
+    table.w td{padding:9px 4px;word-break:break-word}
+    table.w td.wn{font-size:15px}
+    table.w .kw{font-size:12.5px}
+    .ds-sub{font-size:13px}
+    .ab{font-size:15px}
+    .li{font-size:14.5px}
+    .kwchip{font-size:12.5px;padding:3px 8px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <svg class="glyph" viewBox="0 0 64 64" fill="none">
+        <path d="M32 4c4 9 2 14-2 18 6-1 10-5 12-11 3 8-1 16-8 20 7 1 13-2 17-8-1 12-10 19-20 19-13 0-22-9-22-21C9 12 22 6 32 4z" fill="#6d36e0" opacity=".25"/>
+        <path d="M32 8c3 7 1 12-3 16 5-1 9-5 10-10 3 7-1 14-7 17 6 1 11-2 14-7 0 11-9 17-18 17-11 0-19-8-19-19C9 15 22 10 32 8z" stroke="#8b5cf6" stroke-width="2" fill="none"/>
+        <circle cx="26" cy="30" r="2.4" fill="#9ad22f"/><circle cx="36" cy="30" r="2.4" fill="#9ad22f"/>
+      </svg>
+      <div>
+        <h1>Genestealer Cults</h1>
+        <div class="sub">List Builder</div>
+      </div>
+    </div>
+    <div class="topctrl">
+      <input class="army-name" id="armyName" placeholder="Army name…" autocomplete="off">
+      <div class="limitbox">
+        <label for="limitSel">Limit</label>
+        <select id="limitSel">
+          <option>500</option><option>1000</option><option>1500</option>
+          <option selected>2000</option><option>2500</option><option>3000</option>
+          <option value="custom">Custom…</option>
+        </select>
+        <input id="limitCustom" type="number" min="0" step="5" value="2000" class="hidden">
+      </div>
+      <div class="meter">
+        <div class="nums"><span class="total" id="totalPts">0</span><span class="lim">/ <span id="limShow">2000</span> pts</span></div>
+        <div class="bar" id="bar"><i id="barFill"></i></div>
+        <div class="pillstat"><b id="unitCount">0</b> units · <b id="overUnder">2000</b> pts left</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+    <!-- ============ LEFT: CATALOGUE ============ -->
+    <section class="col">
+      <h2>Add Units <span class="count" id="catCount"></span></h2>
+      <div class="searchbox">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9c8fb8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="search" placeholder="Search units, keywords, weapons…" autocomplete="off">
+      </div>
+      <div id="catalogue"></div>
+    </section>
+
+    <!-- ============ RIGHT: ARMY ============ -->
+    <section class="col">
+      <h2>Your Army <span class="count" id="armyCount"></span></h2>
+
+      <div id="detachPicker"></div>
+      <div id="detachCard"></div>
+
+      <div id="armyList"></div>
+
+      <div class="actions" id="armyActions" style="margin-top:14px">
+        <button class="btn primary" id="btnCopy">⧉ Copy list</button>
+        <button class="btn" id="btnSave">💾 Save</button>
+        <button class="btn" id="btnLoad">↺ Load</button>
+        <button class="btn" id="btnExport">⭳ Export</button>
+        <button class="btn" id="btnImport">⭱ Import</button>
+        <button class="btn ghost danger" id="btnClear">Clear</button>
+        <input type="file" id="fileInput" accept="application/json" class="hidden">
+      </div>
+    </section>
+  </div>
+
+  <div class="foot">
+    Points from the attached Munitorum Field Manual (v1.0) — a custom pack where some units cost more for your 3rd+ copy.<br>
+    Statlines, abilities &amp; detachment rules from 39k.pro. Unofficial fan tool · not affiliated with Games Workshop.
+  </div>
+</div>
+
+<!-- Datasheet modal -->
+<div class="modal-bg" id="modalBg"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="gsc-data.js"></script>
+<script>
+(function(){
+  "use strict";
+  const D = window.GSC_DATA;
+  if(!D){document.body.innerHTML='<p style="padding:40px;color:#ef5a6f">Could not load <code>gsc-data.js</code>. Keep it in the same folder as this file.</p>';return;}
+
+  const unitById = Object.fromEntries(D.units.map(u=>[u.id,u]));
+  const detById  = Object.fromEntries(D.detachments.map(d=>[d.id,d]));
+  const CATS = [
+    ["character","Characters"],["battleline","Battleline"],["infantry","Infantry"],
+    ["mounted","Mounted"],["vehicle","Vehicles"],["transport","Dedicated Transport"]
+  ];
+  const $=s=>document.querySelector(s), ce=(t,c)=>{const e=document.createElement(t);if(c)e.className=c;return e;};
+  const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+
+  // ---------- State ----------
+  let army = load() || { name:"", limit:2000, dpLimit:3, detachments:[], entries:[] };
+  let uidSeq = 1;
+  function nextUid(){ return "e"+(Date.now().toString(36))+(uidSeq++); }
+  migrate();
+  function migrate(){
+    if(army.detachment!==undefined){ army.detachments = army.detachment ? [army.detachment] : []; delete army.detachment; }
+    if(!Array.isArray(army.detachments)) army.detachments=[];
+    if(army.dpLimit==null) army.dpLimit=3;
+    army.entries.forEach(e=>{ e.uid=e.uid||nextUid(); if(!Array.isArray(e.wargear)) e.wargear=[]; });
+  }
+
+  // ---------- Detachment / DP helpers ----------
+  const dpCost = d => parseInt(d.dp,10) || 0;
+  const selDets = () => army.detachments.map(id=>detById[id]).filter(Boolean);
+  const dpUsed = () => selDets().reduce((s,d)=>s+dpCost(d),0);
+  function detachBlockReason(d){               // why a detachment can't be added
+    if(army.detachments.includes(d.id)) return "";
+    if(dpUsed()+dpCost(d) > army.dpLimit) return "needs "+dpCost(d)+" DP";
+    if(d.unique && selDets().some(s=>s.unique===d.unique)) return d.unique+" already taken";
+    return "";
+  }
+
+  // ---------- Points engine ----------
+  function entryBaseCost(e){
+    const u = unitById[e.unitId]; if(!u) return 0;
+    const size = u.sizes[e.sizeIdx] || u.sizes[0];
+    // escalating: which copy of this datasheet is this entry?
+    const same = army.entries.filter(x=>x.unitId===e.unitId);
+    const ordinal = same.indexOf(e)+1;          // 1-based
+    const escalated = ordinal>2 && size.repeat!==size.base;
+    return { pts: escalated ? size.repeat : size.base, escalated, ordinal };
+  }
+  function entryWargearCost(e){
+    const u=unitById[e.unitId]; if(!u||!u.wargear) return 0;
+    let s=0; (e.wargear||[]).forEach((q,i)=>{ if(u.wargear[i]) s+=q*u.wargear[i].pts; }); return s;
+  }
+  function entryEnhCost(e){ return e.enh ? e.enh.pts : 0; }
+  function entryTotal(e){ return entryBaseCost(e).pts + entryWargearCost(e) + entryEnhCost(e); }
+  function armyTotal(){ return army.entries.reduce((s,e)=>s+entryTotal(e),0); }
+
+  // ---------- Render: top meter ----------
+  function renderMeter(){
+    const total=armyTotal(), lim=army.limit||0;
+    $("#totalPts").textContent=total;
+    $("#limShow").textContent=lim;
+    $("#unitCount").textContent=army.entries.length;
+    const left=lim-total;
+    $("#overUnder").textContent = left>=0 ? left : ("+"+(-left));
+    $("#overUnder").style.color = left<0 ? "var(--bad)" : left===0 ? "var(--good)" : "";
+    $("#armyCount").textContent = army.entries.length?("· "+total+" pts"):"";
+    const pct = lim>0 ? Math.min(100, total/lim*100) : 0;
+    $("#barFill").style.width=pct+"%";
+    $("#bar").classList.toggle("over", total>lim);
+  }
+
+  // ---------- Render: catalogue ----------
+  function renderCatalogue(){
+    const q=($("#search").value||"").toLowerCase().trim();
+    const host=$("#catalogue"); host.innerHTML="";
+    let shown=0;
+    CATS.forEach(([cat,label])=>{
+      let units=D.units.filter(u=>u.category===cat);
+      if(q) units=units.filter(u=>matches(u,q));
+      if(!units.length) return;
+      const g=ce("div","catgroup"); g.innerHTML="<h3>"+esc(label)+"</h3>";
+      units.forEach(u=>{
+        shown++;
+        const from=Math.min(...u.sizes.map(s=>s.base));
+        const row=ce("div","urow");
+        const role = u.role==="LEADER"?'<span class="role-chip">Leader</span>':
+                     u.role==="SUPPORT"?'<span class="role-chip sup">Support</span>':"";
+        const szTxt = u.sizes.length>1 ? (u.sizes[0].models+"–"+u.sizes[u.sizes.length-1].models+" models") :
+                      (u.sizes[0].models>1? u.sizes[0].models+" models":"single model");
+        row.innerHTML =
+          '<div class="uname">'+esc(u.name)+' '+role+'<small>'+esc(szTxt)+'</small></div>'+
+          '<div class="upts">from <b>'+from+'</b></div>'+
+          '<button class="btn ghost sm" data-info="'+u.id+'">details</button>'+
+          '<button class="btn primary sm" data-add="'+u.id+'">＋ Add</button>';
+        g.appendChild(row);
+      });
+      host.appendChild(g);
+    });
+    if(!shown) host.innerHTML='<div class="empty"><div class="big">No matches</div>Try a different search.</div>';
+    $("#catCount").textContent = q?("· "+shown+" shown"):("· "+D.units.length+" datasheets");
+  }
+  function matches(u,q){
+    if(u.name.toLowerCase().includes(q)) return true;
+    if((u.keywords||[]).some(k=>k.toLowerCase().includes(q))) return true;
+    if((u.weapons||[]).some(w=>w.name.toLowerCase().includes(q))) return true;
+    if((u.abilities||[]).some(a=>a.name.toLowerCase().includes(q))) return true;
+    return false;
+  }
+
+  // ---------- Render: detachment picker (multi-select, DP budget) ----------
+  function refreshDetach(){ renderDetachPicker(); renderDetachCards(); }
+
+  function renderDetachPicker(){
+    const host=$("#detachPicker"); host.innerHTML="";
+    const used=dpUsed(), lim=army.dpLimit;
+    const head=ce("div","dp-head");
+    let pips=""; for(let i=0;i<Math.max(lim,used);i++) pips+='<span class="dp-pip '+(i<used?(used>lim?'over':'on'):'')+'"></span>';
+    head.innerHTML='<span class="dp-title">Detachments</span>'+
+      '<span class="dp-meter"><span class="dp-pips">'+pips+'</span>'+
+      '<span class="dp-count"><b>'+used+'</b> / '+lim+' DP</span></span>';
+    host.appendChild(head);
+    D.detachments.forEach(d=>{
+      const sel=army.detachments.includes(d.id);
+      const reason=sel?"":detachBlockReason(d);
+      const row=ce("div","det-row"+(sel?" sel":"")+(reason?" disabled":""));
+      row.dataset.det=d.id;
+      row.innerHTML=
+        '<span class="det-check">'+(sel?"✓":"")+'</span>'+
+        '<span class="det-nm">'+esc(d.name)+
+          (d.unique?' <span class="tag uq" style="vertical-align:middle">'+esc(d.unique)+'</span>':'')+
+          '<small>'+esc(d.mission)+(reason?' <span class="det-reason">· '+esc(reason)+'</span>':'')+'</small></span>'+
+        '<span class="det-dp">'+esc(d.dp)+'</span>';
+      host.appendChild(row);
+    });
+  }
+
+  function toggleDetach(id){
+    const d=detById[id]; if(!d) return;
+    if(army.detachments.includes(id)){
+      army.detachments=army.detachments.filter(x=>x!==id);
+      army.entries.forEach(e=>{ if(e.enh && e.enh.detId===id) e.enh=null; });
+    } else {
+      const r=detachBlockReason(d);
+      if(r){ toast(d.name+" — "+r); return; }
+      army.detachments.push(id);
+    }
+    refreshDetach(); refresh();
+  }
+
+  function renderDetachCards(){
+    const host=$("#detachCard"); host.innerHTML="";
+    if(!army.detachments.length){
+      host.innerHTML='<div class="note">No detachment selected. Combine up to '+army.dpLimit+' DP worth above (Host of Ascension = 3 DP on its own; others stack — e.g. a 2-DP + a 1-DP).</div>';
+      return;
+    }
+    selDets().forEach(d=>host.appendChild(buildDetachCard(d)));
+  }
+  function buildDetachCard(d){
+    const card=ce("div","card detach-card");
+    let head='<div class="detach-head"><h3>'+esc(d.name)+'</h3>'+
+      '<span class="tag dp">'+esc(d.dp)+'</span>'+
+      '<span class="tag">'+esc(d.mission)+'</span>'+
+      (d.unique?'<span class="tag uq">Unique: '+esc(d.unique)+'</span>':'')+'</div>';
+    let body='<div class="pad">';
+    if(d.rule && d.rule.text){
+      body+='<div class="sec-label">Detachment Rule'+(d.rule.name?': '+esc(d.rule.name):'')+'</div>';
+      body+='<div class="rule-text">'+esc(d.rule.text)+'</div>';
+    }
+    if(d.enhancements && d.enhancements.length){
+      body+='<div class="sec-label">Enhancements</div>';
+      d.enhancements.slice().sort((a,b)=>a.pts-b.pts).forEach(en=>{
+        body+='<div class="enh"><div class="e-top"><span class="e-name">'+esc(en.name)+(en.upgrade?' <span class="role-chip">Upgrade</span>':'')+'</span>'+
+          '<span class="e-pts">'+en.pts+' pts</span></div>'+
+          (en.only?'<div class="e-only">'+esc(en.only)+' only</div>':'')+
+          (en.text?'<div class="e-text">'+esc(en.text)+'</div>':'')+'</div>';
+      });
+    }
+    if(d.stratagems && d.stratagems.length){
+      body+='<div class="sec-label">Stratagems</div>';
+      d.stratagems.forEach(s=>{
+        body+='<details class="strat"><summary><span><span class="s-name">'+esc(s.name)+'</span> '+
+          '<span class="s-cat">'+esc(s.category||"")+'</span></span><span class="s-cp">'+esc(s.cp||"")+'</span></summary>'+
+          '<div class="s-body">'+
+          (s.when?'<div><b>When:</b> '+esc(s.when)+'</div>':'')+
+          (s.target?'<div><b>Target:</b> '+esc(s.target)+'</div>':'')+
+          (s.effect?'<div><b>Effect:</b> '+esc(s.effect)+'</div>':'')+
+          (s.text?'<div>'+esc(s.text)+'</div>':'')+
+          '</div></details>';
+      });
+    }
+    body+='</div>';
+    card.innerHTML=head+body;
+    return card;
+  }
+
+  // enhancements available to a given army entry, across all selected detachments
+  function eligibleEnh(entry){
+    const u=unitById[entry.unitId]; const isChar=u.category==="character"; const out=[];
+    selDets().forEach(d=>(d.enhancements||[]).forEach(en=>{
+      if(isChar){ if(!en.upgrade) out.push({det:d,en:en}); }
+      else if(en.upgrade){
+        const only=(en.only||"").toLowerCase();
+        if(!only || only.includes(u.name.toLowerCase()) || (u.keywords||[]).some(k=>only.includes(k.toLowerCase())))
+          out.push({det:d,en:en});
+      }
+    }));
+    return out;
+  }
+
+  // ---------- Render: army list ----------
+  function renderArmy(){
+    const host=$("#armyList"); host.innerHTML="";
+    if(!army.entries.length){
+      host.innerHTML='<div class="empty"><div class="big">No units yet</div>Pick a detachment and add units from the left.</div>';
+      return;
+    }
+    CATS.forEach(([cat,label])=>{
+      const list=army.entries.filter(e=>unitById[e.unitId] && unitById[e.unitId].category===cat);
+      if(!list.length) return;
+      const g=ce("div","agroup"); g.innerHTML="<h3>"+esc(label)+"</h3>";
+      list.forEach(e=>g.appendChild(renderEntry(e)));
+      host.appendChild(g);
+    });
+  }
+
+  function renderEntry(e){
+    const u=unitById[e.unitId];
+    const bc=entryBaseCost(e), tot=entryTotal(e);
+    const box=ce("div","entry");
+
+    // row 1: name, warlord, size, cost
+    let r1='<div class="e-row1">';
+    r1+='<span class="e-nm">'+esc(u.name)+(e.warlord?'<span class="wl">Warlord</span>':'')+'</span>';
+    if(u.sizes.length>1){
+      r1+='<select class="sz" data-sz="'+e.uid+'">'+u.sizes.map((s,i)=>
+        '<option value="'+i+'"'+(i===e.sizeIdx?' selected':'')+'>'+esc(s.label)+'</option>').join('')+'</select>';
+    }
+    r1+='<span class="e-cost">'+tot+(bc.escalated?'<span class="tier">3rd+ copy</span>':'')+'</span>';
+    r1+='<button class="btn icon sm" data-info="'+u.id+'" title="Datasheet">ⓘ</button>';
+    r1+='<button class="btn icon sm danger" data-del="'+e.uid+'" title="Remove">✕</button>';
+    r1+='</div>';
+
+    // row 2: enhancement (eligible) + warlord toggle (characters)
+    let r2='';
+    const isChar=u.category==="character";
+    const elig=eligibleEnh(e);
+    if(elig.length || isChar){
+      r2+='<div class="e-row2">';
+      if(elig.length){
+        r2+='<span class="mini">Enhance</span>';
+        const cur=e.enh?(e.enh.detId+"|"+e.enh.name):"";
+        const byDet={};
+        elig.forEach(x=>{ (byDet[x.det.id]=byDet[x.det.id]||{name:x.det.name,items:[]}).items.push(x.en); });
+        let opts='<option value="">— none —</option>';
+        Object.keys(byDet).forEach(did=>{ const g=byDet[did];
+          opts+='<optgroup label="'+esc(g.name)+'">'+g.items.map(en=>{ const v=did+"|"+en.name;
+            return '<option value="'+esc(v)+'"'+(cur===v?' selected':'')+'>'+esc(en.name)+' (+'+en.pts+')</option>';
+          }).join('')+'</optgroup>';
+        });
+        r2+='<select data-enh="'+e.uid+'">'+opts+'</select>';
+      } else if(isChar){
+        r2+='<span class="mini" style="color:var(--faint)">'+(army.detachments.length?'no enhancement for this model':'pick a detachment')+'</span>';
+      }
+      if(isChar) r2+='<button class="btn ghost sm" data-wl="'+e.uid+'">'+(e.warlord?'★ Warlord':'☆ Warlord')+'</button>';
+      r2+='</div>';
+    }
+
+    // wargear stepper
+    if(u.wargear && u.wargear.length){
+      r2+='<div class="e-row2">';
+      u.wargear.forEach((w,i)=>{
+        const q=(e.wargear&&e.wargear[i])||0;
+        r2+='<span class="mini">'+esc(w.label)+' (+'+w.pts+')</span>'+
+          '<span class="stepper"><button data-wg="'+e.uid+'" data-wi="'+i+'" data-d="-1">−</button>'+
+          '<span class="qn">'+q+'</span>'+
+          '<button data-wg="'+e.uid+'" data-wi="'+i+'" data-d="1">＋</button></span>';
+      });
+      r2+='</div>';
+    }
+
+    // attachment (leaders/support that can lead something in the army)
+    let attach='';
+    if(u.leads && u.leads.length){
+      const targets=army.entries.filter(x=>u.leads.includes(x.unitId));
+      if(targets.length){
+        attach='<div class="e-row2"><span class="mini">Attach to</span>'+
+          '<select data-attach="'+e.uid+'"><option value="">— unattached —</option>'+
+          targets.map(t=>'<option value="'+t.uid+'"'+(e.attachTo===t.uid?' selected':'')+'>'+
+            esc(unitById[t.unitId].name)+'</option>').join('')+'</select></div>';
+        if(e.attachTo){
+          const tt=army.entries.find(x=>x.uid===e.attachTo);
+          if(tt) attach+='<div class="attach-line">▸ leading '+esc(unitById[tt.unitId].name)+'</div>';
+        }
+      }
+    }
+
+    // led-by chips on bodyguard units
+    let ledchips='';
+    const leaders=army.entries.filter(x=>x.attachTo===e.uid);
+    if(leaders.length){
+      ledchips='<div class="ledchips">'+leaders.map(l=>'<span class="ledchip">★ '+esc(unitById[l.unitId].name)+'</span>').join('')+'</div>';
+    }
+
+    box.innerHTML=r1+r2+attach+ledchips;
+    return box;
+  }
+
+  // ---------- Datasheet modal ----------
+  function openDatasheet(id){
+    const u=unitById[id]; if(!u) return;
+    const m=$("#modal");
+    let h='<div class="ds-head"><div><h3>'+esc(u.name)+'</h3>'+
+      '<div class="ds-meta">'+esc(catLabel(u.category))+(u.role?' · '+(u.role==="LEADER"?"Leader":"Support"):'')+
+      ' · from '+Math.min(...u.sizes.map(s=>s.base))+' pts</div></div>'+
+      '<button class="ds-close" data-close>✕</button></div><div class="ds-body">';
+
+    // stat strip(s)
+    u.stats.forEach(st=>{
+      if(st.profile) h+='<div class="stat-prof">'+esc(st.profile)+'</div>';
+      h+='<div class="stat-strip">'+
+        cell("M",st.M)+cell("T",st.T)+cell("SV",st.SV)+cell("W",st.W)+cell("LD",st.LD)+cell("OC",st.OC)+'</div>';
+    });
+
+    // weapons
+    const rng=u.weapons.filter(w=>w.kind==="Ranged"), mel=u.weapons.filter(w=>w.kind==="Melee");
+    if(rng.length) h+=wtable("Ranged Weapons",rng,true);
+    if(mel.length) h+=wtable("Melee Weapons",mel,false);
+
+    // abilities
+    if(u.factionAbilities&&u.factionAbilities.length)
+      h+='<div class="ds-sub">Faction</div><div class="ab">'+u.factionAbilities.map(esc).join(', ')+'</div>';
+    if(u.coreAbilities&&u.coreAbilities.length)
+      h+='<div class="ds-sub">Core</div><div class="ab">'+u.coreAbilities.map(esc).join(', ')+'</div>';
+    if(u.abilities&&u.abilities.length){
+      h+='<div class="ds-sub">Abilities</div>';
+      u.abilities.forEach(a=>h+='<div class="ab"><b>'+esc(a.name)+'.</b> '+esc(a.text)+'</div>');
+    }
+    if(u.wargearAbilities&&u.wargearAbilities.length){
+      h+='<div class="ds-sub">Wargear Abilities</div>';
+      u.wargearAbilities.forEach(a=>h+='<div class="ab"><b>'+esc(a.name)+'.</b> '+esc(a.text)+'</div>');
+    }
+
+    // composition / equipped / options
+    if(u.composition&&u.composition.length){
+      h+='<div class="ds-sub">Unit Composition</div>';
+      u.composition.forEach(c=>h+='<div class="li">'+esc(c)+'</div>');
+    }
+    if(u.equipped&&u.equipped.length){
+      h+='<div class="ds-sub">Equipped</div>';
+      u.equipped.forEach(c=>h+='<div class="li">'+esc(c)+'</div>');
+    }
+    if(u.options&&u.options.length){
+      h+='<div class="ds-sub">Wargear Options</div>';
+      u.options.forEach(c=>h+='<div class="li">'+esc(c)+'</div>');
+    }
+    if(u.leads&&u.leads.length){
+      h+='<div class="ds-sub">Can Lead</div><div class="li">'+u.leads.map(id=>esc((unitById[id]||{}).name||id)).join(', ')+'</div>';
+    }
+
+    // keywords
+    h+='<div class="ds-sub">Keywords</div><div class="keyword-row">'+
+      (u.keywords||[]).map(k=>'<span class="kwchip">'+esc(k)+'</span>').join('')+'</div>';
+    h+='<div class="ds-sub">Faction Keywords</div><div class="keyword-row">'+
+      (u.factionKeywords||[]).map(k=>'<span class="kwchip">'+esc(k)+'</span>').join('')+'</div>';
+
+    h+='</div>';
+    m.innerHTML=h;
+    $("#modalBg").classList.add("show");
+  }
+  function cell(k,v){return '<div class="stat-cell"><div class="k">'+k+'</div><div class="v">'+esc(v)+'</div></div>';}
+  function wtable(title,ws,ranged){
+    let h='<div class="ds-sub">'+title+'</div><table class="w"><tr><th>Weapon</th><th>'+(ranged?'Range':'')+'</th>'+
+      '<th>A</th><th>'+(ranged?'BS':'WS')+'</th><th>S</th><th>AP</th><th>D</th></tr>';
+    ws.forEach(w=>{
+      h+='<tr><td class="wn">'+esc(w.name)+(w.keywords?'<div class="kw">['+esc(w.keywords)+']</div>':'')+'</td>'+
+        '<td>'+esc(ranged?w.range:'')+'</td><td>'+esc(w.A)+'</td><td>'+esc(w.skill)+'</td>'+
+        '<td>'+esc(w.S)+'</td><td>'+esc(w.AP)+'</td><td>'+esc(w.D)+'</td></tr>';
+    });
+    return h+'</table>';
+  }
+  function catLabel(c){return (CATS.find(x=>x[0]===c)||[,"Unit"])[1];}
+  function closeModal(){$("#modalBg").classList.remove("show");}
+
+  // ---------- Mutations ----------
+  function addUnit(id){
+    const u=unitById[id]; if(!u) return;
+    army.entries.push({uid:nextUid(),unitId:id,sizeIdx:0,enh:null,attachTo:null,wargear:[],warlord:false});
+    refresh(); toast(u.name+" added");
+  }
+  function removeEntry(uid){
+    army.entries.forEach(e=>{ if(e.attachTo===uid) e.attachTo=null; });
+    army.entries=army.entries.filter(e=>e.uid!==uid);
+    refresh();
+  }
+  function setEnh(uid,val){
+    const e=army.entries.find(x=>x.uid===uid); if(!e) return;
+    if(!val){ e.enh=null; refresh(); return; }
+    const sep=val.indexOf("|"), detId=val.slice(0,sep), name=val.slice(sep+1);
+    const det=detById[detId];
+    const en=det&&det.enhancements.find(x=>x.name===name);
+    e.enh = en? {name:en.name,pts:en.pts,detId:detId} : null;
+    refresh();
+  }
+
+  // ---------- Persistence / export ----------
+  const KEY="gsc_list_builder_v1";
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(army)); }catch(e){} }
+  function load(){ try{return JSON.parse(localStorage.getItem(KEY));}catch(e){return null;} }
+
+  function listText(){
+    const total=armyTotal();
+    let out=(army.name||"Untitled Army")+" — "+total+"/"+army.limit+" pts\n";
+    out+="Genestealer Cults";
+    const dets=selDets();
+    if(dets.length) out+=" · "+dets.map(d=>d.name).join(" + ")+" ("+dpUsed()+" DP)";
+    out+="\n";
+    CATS.forEach(([cat,label])=>{
+      const list=army.entries.filter(e=>unitById[e.unitId]&&unitById[e.unitId].category===cat);
+      if(!list.length) return;
+      out+="\n"+label.toUpperCase()+"\n";
+      list.forEach(e=>{
+        const u=unitById[e.unitId], size=u.sizes[e.sizeIdx]||u.sizes[0];
+        let line="• "+u.name;
+        if(u.sizes.length>1||size.models>1) line+=" ×"+size.models;
+        line+=" ("+entryTotal(e)+")";
+        if(e.warlord) line+=" [Warlord]";
+        if(e.enh) line+=" — "+e.enh.name+" (+"+e.enh.pts+")";
+        if(e.attachTo){ const t=army.entries.find(x=>x.uid===e.attachTo); if(t) line+=" → leading "+unitById[t.unitId].name; }
+        out+=line+"\n";
+      });
+    });
+    return out;
+  }
+
+  // ---------- Wiring ----------
+  function refresh(){ save(); renderMeter(); renderArmy(); renderCatalogue(); }
+
+  document.addEventListener("click",ev=>{
+    const t=ev.target.closest("[data-add],[data-info],[data-del],[data-wl],[data-wg],[data-close],[data-det]");
+    if(!t) return;
+    if(t.dataset.det!=null) toggleDetach(t.dataset.det);
+    else if(t.dataset.add!=null) addUnit(t.dataset.add);
+    else if(t.dataset.info!=null) openDatasheet(t.dataset.info);
+    else if(t.dataset.del!=null) removeEntry(t.dataset.del);
+    else if(t.dataset.wl!=null){ const e=army.entries.find(x=>x.uid===t.dataset.wl);
+      if(e){ const v=!e.warlord; army.entries.forEach(x=>x.warlord=false); e.warlord=v; refresh(); } }
+    else if(t.dataset.wg!=null){ const e=army.entries.find(x=>x.uid===t.dataset.wg);
+      if(e){ e.wargear=e.wargear||[]; const i=+t.dataset.wi; e.wargear[i]=Math.max(0,(e.wargear[i]||0)+ +t.dataset.d); refresh(); } }
+    else if(t.dataset.close!=null) closeModal();
+  });
+  document.addEventListener("change",ev=>{
+    const t=ev.target;
+    if(t.dataset.sz!=null){ const e=army.entries.find(x=>x.uid===t.dataset.sz); if(e){e.sizeIdx=+t.value; refresh();} }
+    else if(t.dataset.enh!=null) setEnh(t.dataset.enh,t.value);
+    else if(t.dataset.attach!=null){ const e=army.entries.find(x=>x.uid===t.dataset.attach); if(e){e.attachTo=t.value||null; refresh();} }
+  });
+
+  $("#search").addEventListener("input",renderCatalogue);
+  $("#armyName").addEventListener("input",e=>{army.name=e.target.value;save();});
+  $("#limitSel").addEventListener("change",e=>{
+    if(e.target.value==="custom"){ $("#limitCustom").classList.remove("hidden"); $("#limitCustom").focus(); }
+    else { $("#limitCustom").classList.add("hidden"); army.limit=+e.target.value; save(); renderMeter(); }
+  });
+  $("#limitCustom").addEventListener("input",e=>{ army.limit=+e.target.value||0; save(); renderMeter(); });
+
+  $("#modalBg").addEventListener("click",e=>{ if(e.target.id==="modalBg") closeModal(); });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeModal(); });
+
+  $("#btnCopy").addEventListener("click",()=>{
+    const txt=listText();
+    navigator.clipboard?.writeText(txt).then(()=>toast("List copied to clipboard"),()=>fallbackCopy(txt));
+  });
+  function fallbackCopy(txt){ const ta=ce("textarea"); ta.value=txt; document.body.appendChild(ta); ta.select();
+    try{document.execCommand("copy");toast("List copied");}catch(e){toast("Copy failed");} ta.remove(); }
+  $("#btnSave").addEventListener("click",()=>{ save(); toast("Saved to this browser"); });
+  $("#btnLoad").addEventListener("click",()=>{ const a=load(); if(a){ army=a; migrate(); syncControls(); refreshDetach(); refresh(); toast("Loaded saved army"); } else toast("Nothing saved yet"); });
+  $("#btnClear").addEventListener("click",()=>{ if(confirm("Clear the whole army?")){ army={name:"",limit:army.limit,dpLimit:army.dpLimit,detachments:[],entries:[]}; syncControls(); refreshDetach(); refresh(); } });
+  $("#btnExport").addEventListener("click",()=>{
+    const blob=new Blob([JSON.stringify(army,null,2)],{type:"application/json"});
+    const a=ce("a"); a.href=URL.createObjectURL(blob);
+    a.download=(army.name||"gsc-army").replace(/[^\w\-]+/g,"_")+".json"; a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),1000); toast("Exported JSON");
+  });
+  $("#btnImport").addEventListener("click",()=>$("#fileInput").click());
+  $("#fileInput").addEventListener("change",e=>{
+    const f=e.target.files[0]; if(!f) return; const r=new FileReader();
+    r.onload=()=>{ try{ const a=JSON.parse(r.result); if(!a.entries) throw 0;
+      army=a; migrate(); syncControls(); refreshDetach(); refresh(); toast("Imported army");
+    }catch(err){ toast("Invalid file"); } }; r.readAsText(f); e.target.value="";
+  });
+
+  let toastT;
+  function toast(msg){ const el=$("#toast"); el.textContent=msg; el.classList.add("show");
+    clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove("show"),1900); }
+
+  function syncControls(){
+    $("#armyName").value=army.name||"";
+    const presets=["500","1000","1500","2000","2500","3000"];
+    if(presets.includes(String(army.limit))){ $("#limitSel").value=String(army.limit); $("#limitCustom").classList.add("hidden"); }
+    else { $("#limitSel").value="custom"; $("#limitCustom").classList.remove("hidden"); $("#limitCustom").value=army.limit; }
+  }
+
+  // ---------- Init ----------
+  syncControls(); refreshDetach(); refresh();
+})();
+</script>
+</body>
+</html>
