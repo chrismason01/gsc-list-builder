@@ -1110,6 +1110,8 @@ window.GSC_DATA = {
     const q=($("#search").value||"").toLowerCase().trim();
     const host=$("#catalogue"); host.innerHTML="";
     let shown=0;
+    const abbr = s => s.replace(/\(.*?\)/g,"").trim().split(/\s+/)
+      .filter(w=>!/^(per|of|the|a|with|and|model|models)$/i.test(w)).map(w=>w[0].toUpperCase()).join("");
     CATS.forEach(([cat,label])=>{
       let units=D.units.filter(u=>u.category===cat);
       if(q) units=units.filter(u=>matches(u,q));
@@ -1123,8 +1125,12 @@ window.GSC_DATA = {
                      u.role==="SUPPORT"?'<span class="role-chip sup">Support</span>':"";
         const szTxt = u.sizes.length>1 ? (u.sizes[0].models+"–"+u.sizes[u.sizes.length-1].models+" models") :
                       (u.sizes[0].models>1? u.sizes[0].models+" models":"single model");
+        let extra="";
+        const escSize=u.sizes.find(s=>s.repeat>s.base);
+        if(escSize) extra+=" · 3rd +"+(escSize.repeat-escSize.base);
+        (u.wargear||[]).forEach(w=>{ extra+=" · "+abbr(w.label)+" +"+w.pts; });
         row.innerHTML =
-          '<div class="uname">'+esc(u.name)+' '+role+'<small>'+esc(szTxt)+'</small></div>'+
+          '<div class="uname">'+esc(u.name)+' '+role+'<small>'+esc(szTxt+extra)+'</small></div>'+
           '<div class="upts">from <b>'+from+'</b></div>'+
           '<button class="btn ghost sm" data-info="'+u.id+'">details</button>'+
           '<button class="btn primary sm" data-add="'+u.id+'">＋ Add</button>';
@@ -1301,8 +1307,9 @@ window.GSC_DATA = {
         elig.forEach(x=>{ const en=x.en, v=x.det.id+"|"+en.name, here=cur===v;
           const limit=en.upgrade?3:1, other=enhUsedBy(v,e.uid), off=(other>=limit)&&!here;
           const extra = en.upgrade ? ' <span class="ec">'+(other+(here?1:0))+'/3</span>' : (off?' <span class="ec">taken</span>':'');
+          const pre = here?'✓ ':(off?'':'+ ');
           r2+='<span class="echip'+(here?' sel':'')+(off?' off':'')+'" data-enhpick="'+e.uid+'" data-enhval="'+esc(v)+'">'+
-            esc(en.name)+' <span class="ep">+'+en.pts+'</span>'+extra+'</span>';
+            pre+esc(en.name)+' <span class="ep">+'+en.pts+'</span>'+extra+'</span>';
         });
         r2+='</div>';
       }
@@ -1409,6 +1416,7 @@ window.GSC_DATA = {
     h+='</div>';
     m.innerHTML=h;
     $("#modalBg").classList.add("show");
+    if(!modalPushed){ try{ history.pushState({gscModal:1},""); }catch(e){} modalPushed=true; }
   }
   function cell(k,v){return '<div class="stat-cell"><div class="k">'+k+'</div><div class="v">'+esc(v)+'</div></div>';}
   function wtable(title,ws,ranged){
@@ -1426,7 +1434,16 @@ window.GSC_DATA = {
     return h;
   }
   function catLabel(c){return (CATS.find(x=>x[0]===c)||[,"Unit"])[1];}
-  function closeModal(){$("#modalBg").classList.remove("show");}
+  let modalPushed=false;
+  function closeModal(){
+    if(!$("#modalBg").classList.contains("show")) return;
+    if(modalPushed){ modalPushed=false; try{ history.back(); }catch(e){ $("#modalBg").classList.remove("show"); } }
+    else $("#modalBg").classList.remove("show");
+  }
+  // phone/browser Back closes the open datasheet instead of leaving the app
+  window.addEventListener("popstate",()=>{
+    if($("#modalBg").classList.contains("show")){ $("#modalBg").classList.remove("show"); modalPushed=false; }
+  });
 
   // ---------- Mutations ----------
   function addUnit(id){
