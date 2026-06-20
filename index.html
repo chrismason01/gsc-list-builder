@@ -97,6 +97,14 @@
     background:#2a1d12;color:var(--warn);border:1px solid #5a4119;white-space:nowrap}
   .det-reason{font-size:10.5px;color:var(--bad);font-style:italic;margin-left:4px}
   .detach-card{margin-bottom:14px}
+  /* enhancement / upgrade availability tracker */
+  .trk{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .trk:last-child{border-bottom:0}
+  .trk-nm{color:var(--ink);font-weight:600;min-width:0}
+  .trk-pts{color:var(--acid);font-weight:700;font-size:12px;margin-left:4px}
+  .trk-free{color:var(--good);font-size:12.5px;font-weight:700;white-space:nowrap}
+  .trk-used{color:var(--purple);font-size:12.5px;font-weight:600;text-align:right}
+  .trk-full{color:var(--warn)}
   .detach-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;border-bottom:1px solid var(--line);
     background:linear-gradient(180deg,var(--panel2),var(--panel))}
   .detach-head h3{font-size:16px;color:var(--bone)}
@@ -275,6 +283,9 @@
     .stepper button{width:34px;height:34px;font-size:20px}
 
     .sec-label{font-size:15px}
+    .trk{font-size:16px;padding:10px 0}
+    .trk-pts{font-size:13px}
+    .trk-free,.trk-used{font-size:14px}
     .rule-text{font-size:17px;line-height:1.55}
     .enh{padding:13px}
     .enh .e-name{font-size:18px}
@@ -369,6 +380,7 @@
 
       <div id="detachPicker"></div>
       <div id="detachCard"></div>
+      <div id="enhTracker"></div>
 
       <div id="armyList"></div>
 
@@ -611,6 +623,34 @@
   function enhUsedBy(key, exceptUid){
     return army.entries.filter(e=>e.uid!==exceptUid && e.enh && (e.enh.detId+"|"+e.enh.name)===key).length;
   }
+  function entriesWith(key){ return army.entries.filter(e=>e.enh && (e.enh.detId+"|"+e.enh.name)===key); }
+
+  // at-a-glance availability of every enhancement & upgrade from the chosen detachment(s)
+  function renderTracker(){
+    const host=$("#enhTracker"); host.innerHTML="";
+    const dets=selDets(); if(!dets.length) return;
+    const enh=[], upg=[];
+    dets.forEach(d=>(d.enhancements||[]).forEach(en=>{ (en.upgrade?upg:enh).push({en:en,key:d.id+"|"+en.name}); }));
+    if(!enh.length && !upg.length) return;
+    let body='<div class="detach-head"><h3>Enhancements &amp; Upgrades</h3></div><div class="pad">';
+    if(enh.length){
+      body+='<div class="sec-label">Enhancements · one use each</div>';
+      enh.forEach(o=>{ const users=entriesWith(o.key);
+        body+='<div class="trk"><span class="trk-nm">'+esc(o.en.name)+'<span class="trk-pts">+'+o.en.pts+'</span></span>'+
+          (users.length?'<span class="trk-used">✓ '+esc(users.map(u=>unitById[u.unitId].name).join(', '))+'</span>'
+                       :'<span class="trk-free">Available</span>')+'</div>';
+      });
+    }
+    if(upg.length){
+      body+='<div class="sec-label">Upgrades · up to 3 units each</div>';
+      upg.forEach(o=>{ const n=entriesWith(o.key).length, full=n>=3;
+        body+='<div class="trk"><span class="trk-nm">'+esc(o.en.name)+'<span class="trk-pts">+'+o.en.pts+'</span></span>'+
+          '<span class="trk-free'+(full?' trk-full':'')+'">'+n+'/3'+(full?' · full':'')+'</span></div>';
+      });
+    }
+    body+='</div>';
+    const card=ce("div","card detach-card"); card.innerHTML=body; host.appendChild(card);
+  }
 
   // ---------- Render: army list ----------
   function renderArmy(){
@@ -848,7 +888,7 @@
   }
 
   // ---------- Wiring ----------
-  function refresh(){ save(); renderMeter(); renderArmy(); renderCatalogue(); }
+  function refresh(){ save(); renderMeter(); renderArmy(); renderCatalogue(); renderTracker(); }
 
   document.addEventListener("click",ev=>{
     const t=ev.target.closest("[data-add],[data-info],[data-del],[data-wl],[data-wg],[data-close],[data-det]");
