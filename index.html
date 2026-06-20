@@ -68,6 +68,11 @@
   .col h2{font-size:13px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);
     margin:2px 0 10px;display:flex;align-items:center;gap:8px}
   .col h2 .count{color:var(--faint);font-weight:600}
+  .col h2 .stepn{display:inline-flex;align-items:center;justify-content:center;width:21px;height:21px;border-radius:50%;
+    background:var(--purple-d);color:#fff;font-size:11px;font-weight:800;letter-spacing:0;flex:0 0 21px}
+  .wrap > section.col{margin-top:20px}
+  .wrap > .grid{margin-top:20px}
+  .rules-section{margin-top:20px}
 
   .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
   .pad{padding:14px}
@@ -365,10 +370,17 @@
 </header>
 
 <div class="wrap">
+
+  <!-- 1 · Detachment — choose before building -->
+  <section class="col">
+    <h2><span class="stepn">1</span> Detachment</h2>
+    <div id="detachPicker"></div>
+  </section>
+
   <div class="grid">
-    <!-- ============ LEFT: CATALOGUE ============ -->
+    <!-- 2 · Add units -->
     <section class="col">
-      <h2>Add Units <span class="count" id="catCount"></span></h2>
+      <h2><span class="stepn">2</span> Add Units <span class="count" id="catCount"></span></h2>
       <div class="searchbox">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9c8fb8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
         <input id="search" placeholder="Search units, keywords, weapons…" autocomplete="off">
@@ -376,15 +388,10 @@
       <div id="catalogue"></div>
     </section>
 
-    <!-- ============ RIGHT: ARMY ============ -->
+    <!-- 3 · Your army (the list) -->
     <section class="col">
-      <h2>Your Army <span class="count" id="armyCount"></span></h2>
-
-      <div id="detachPicker"></div>
-      <div id="detachCard"></div>
-
+      <h2><span class="stepn">3</span> Your Army <span class="count" id="armyCount"></span></h2>
       <div id="armyList"></div>
-
       <div class="actions" id="armyActions" style="margin-top:14px">
         <button class="btn primary" id="btnCopy">⧉ Copy list</button>
         <button class="btn" id="btnSave">💾 Save</button>
@@ -396,6 +403,12 @@
       </div>
     </section>
   </div>
+
+  <!-- 4 · Reference: detachment rules, enhancements & stratagems -->
+  <section class="col rules-section">
+    <h2>Detachment Rules &amp; Stratagems</h2>
+    <div id="detachCard"></div>
+  </section>
 
   <div class="foot">
     Points from the attached Munitorum Field Manual (v1.0) — a custom pack where some units cost more for your 3rd+ copy.<br>
